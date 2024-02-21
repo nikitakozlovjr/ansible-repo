@@ -1,0 +1,15 @@
+- hosts: trainserver
+
+  tasks: 
+    - name: install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+      become: yes
+
+  handlers:
+    - name: restart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      become: yes  
