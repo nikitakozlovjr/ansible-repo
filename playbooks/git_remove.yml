@@ -1,8 +1,0 @@
-- hosts: trainserver
-
-  tasks:
-    - name: remove git
-      ansible.builtin.apt:
-        name: git
-        state: absent
-      become: yes
