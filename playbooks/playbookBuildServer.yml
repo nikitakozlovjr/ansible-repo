@@ -1,0 +1,20 @@
+- hosts: trainserver
+
+  tasks:
+    - name: install git 
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes
+      tags: git
+
+    - name: install nodejs
+      ansible.builtin.apt:
+        name: nodejs
+        state: present
+        update_cache: yes
+      become: yes
+      tags: nodejs
+
+      
