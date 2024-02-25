@@ -7,9 +7,23 @@
         state: present
       become: yes
 
-  handlers:
+    - name: update index.html files
+      ansible.builtin.copy:
+        src: '../files/index.html'
+        dest: '/usr/share/nginx/html/index.html'
+      become: yes
+
+    - name: update nginx config
+      ansible.builtin.copy:
+        src: '../files/nginx.conf'
+        dest: '/etc/nginx/nginx.conf'
+      notify:
+        - restart nginx
+      become: yes
+
+  handlers: 
     - name: restart nginx
       ansible.builtin.service:
         name: nginx
         state: reloaded
-      become: yes  
+      become: yes
