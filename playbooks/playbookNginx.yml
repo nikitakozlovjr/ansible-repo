@@ -11,7 +11,7 @@
       become: yes
 
     - name: update index.html files
-      ansible.builtin.copy:
+      ansible.builtin.template:
         src: "{{root_dir}}/index.html"
         dest: '/usr/share/nginx/html/index.html'
       become: yes
