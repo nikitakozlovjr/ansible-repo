@@ -1,20 +1,16 @@
 - hosts: trainserver
   gather_facts: no
-  tasks:
-    - name: install git 
-      ansible.builtin.apt:
-        name: git
-        state: present
-        update_cache: yes
-      become: yes
-      tags: git
 
-    - name: install nodejs
+  tasks:
+    - name: install package 
       ansible.builtin.apt:
-        name: nodejs
+        name: "{{ item }}"
         state: present
         update_cache: yes
+      loop:
+        - git
+        - nodejs
       become: yes
-      tags: nodejs
+      
 
       
