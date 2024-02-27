@@ -9,7 +9,7 @@
       tags: git
     
     - name: remove nodejs
-      ansible.builtin.git:
+      ansible.builtin.apt:
         name: nodejs
         state: absent
       become: yes
