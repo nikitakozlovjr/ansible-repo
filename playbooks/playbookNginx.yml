@@ -2,6 +2,7 @@
   vars:
     nginx_port: 80
     root_dir: ../files
+    nginx: /etc/nginx
 
   tasks: 
     - name: install nginx
@@ -10,16 +11,19 @@
         state: present
       become: yes
 
-    - name: update index.html files
+    - name: update kozlovjr config
       ansible.builtin.template:
-        src: "{{root_dir}}/index.html"
-        dest: '/usr/share/nginx/html/index.html'
+        src: "{{root_dir}}/kozlovjr.conf"
+        dest: "{{nginx}}/sites-available/kozlovjr.conf"
+      notify:
+        - restart nginx
       become: yes
 
-    - name: update nginx config
-      ansible.builtin.template:
-        src: "{{root_dir}}/nginx.conf"
-        dest: '/etc/nginx/nginx.conf'
+    - name: create symbolik link
+      ansible.builtin.file:
+        src: "/etc/nginx/sites-available/kozlovjr.conf"
+        dest: "/etc/nginx/sites-enabled/kozlovjr.conf"
+        state: link 
       notify:
         - restart nginx
       become: yes
