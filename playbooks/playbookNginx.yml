@@ -1,4 +1,5 @@
 - hosts: trainserver
+  remote_user: ubuntu
   vars:
     nginx_port: 80
     root_dir: ../files
