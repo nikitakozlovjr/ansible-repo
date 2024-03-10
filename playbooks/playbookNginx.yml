@@ -1,0 +1,41 @@
+- hosts: health_clover 
+  
+  tasks: 
+    - name: install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+      become: yes
+      tags: install_nginx
+
+    - name: add www-data to group ubuntu
+      ansible.builtin.user:
+        name: www-data
+        group: ubuntu
+      become: yes
+      tags: www-data_set
+
+    - name: add configuration file
+      ansible.builtin.copy: 
+        src: ../files/health_clover.conf
+        dest: /etc/nginx/sites-available/health_clover.conf
+      notify: 
+        - restart nginx
+      become: yes
+
+    - name: add link to config file
+      ansible.builtin.file:
+        src: /etc/nginx/sites-available/health_clover.conf
+        dest: /etc/nginx/sites-enabled/health_clover.conf
+        state: link
+      notify: 
+        - restart nginx
+      become: yes
+      
+  handlers:
+    - name: restart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      become: yes
