@@ -1,0 +1,17 @@
+- hosts: hosts.ini
+
+  tasks:
+    - name: install git
+      ansible.builtin.apt:
+        name: git
+        state: present
+      become: yes
+      tags: install_git
+
+    - name: clone repo
+      ansible.builtin.git: 
+        repo: "https://github.com/nikitakozlovjr/Calculator-calories.git"
+        dest: /home/ubuntu/www/health_clover
+        clone: yes
+        update: no
+      tags: clone_repo
