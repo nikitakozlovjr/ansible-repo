@@ -1,1 +1,0 @@
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBmjSJ3a+axnl7DSwuq1aNLIyQ9rFMtiAxyyj17usrwJ nikita3726898@gmail.com
